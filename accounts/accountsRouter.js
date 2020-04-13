@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     db.select('*').from('accounts')
+    .orderBy(req.body.sortby || 'id', req.body.sortdir || 'asc').limit(req.body.limit)
     .then(accounts => {
         res.status(200).json({ data: accounts });
     })
